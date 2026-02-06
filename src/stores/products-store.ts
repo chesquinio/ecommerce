@@ -41,12 +41,12 @@ export const useProductsStore = create<ProductsState>((set, get) => ({
       const filters = { ...get().filters, ...filterOverrides }
       const params = new URLSearchParams()
 
-      if (filters.categories.length === 1) {
-        params.set("category", filters.categories[0])
-      }
-      if (filters.brands.length === 1) {
-        params.set("brand", filters.brands[0])
-      }
+      filters.categories.forEach((category) => {
+        params.append("category", category)
+      })
+      filters.brands.forEach((brand) => {
+        params.append("brand", brand)
+      })
       if (filters.priceRange[0] > 0) {
         params.set("minPrice", filters.priceRange[0].toString())
       }

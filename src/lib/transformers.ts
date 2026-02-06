@@ -51,6 +51,7 @@ export function transformBrand(brand: BrandWithCount): Brand {
   return {
     id: brand.id,
     name: brand.name,
+    slug: brand.slug,
     logo: brand.logo || undefined,
     productCount: brand._count?.products || 0,
   }

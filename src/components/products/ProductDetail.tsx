@@ -7,6 +7,8 @@ import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Product } from "@/types"
 import { useCartStore } from "@/stores/cart-store"
+import { formatPrice, cn } from "@/lib/utils"
+import { useFavorites } from "@/components/providers/FavoritesProvider"
 
 interface ProductDetailProps {
   product: Product
@@ -16,6 +18,8 @@ export function ProductDetail({ product }: ProductDetailProps) {
   const [quantity, setQuantity] = useState(1)
   const [added, setAdded] = useState(false)
   const addItem = useCartStore((state) => state.addItem)
+  const { isFavorite, toggle } = useFavorites()
+  const isFav = isFavorite(product.id)
 
   const hasDiscount = product.originalPrice && product.originalPrice > product.price
   const discountPercent = hasDiscount
@@ -58,11 +62,10 @@ export function ProductDetail({ product }: ProductDetailProps) {
           {[...Array(5)].map((_, i) => (
             <Star
               key={i}
-              className={`h-4 w-4 ${
-                i < Math.floor(product.rating)
-                  ? "fill-yellow-400 text-yellow-400"
-                  : "text-muted-foreground"
-              }`}
+              className={`h-4 w-4 ${i < Math.floor(product.rating)
+                ? "fill-yellow-400 text-yellow-400"
+                : "text-muted-foreground"
+                }`}
             />
           ))}
         </div>
@@ -73,11 +76,11 @@ export function ProductDetail({ product }: ProductDetailProps) {
       {/* Price */}
       <div className="flex items-baseline gap-3">
         <span className="text-3xl font-bold text-primary">
-          S/ {product.price.toFixed(2)}
+          {formatPrice(product.price)}
         </span>
         {hasDiscount && (
           <span className="text-lg text-muted-foreground line-through">
-            S/ {product.originalPrice!.toFixed(2)}
+            {formatPrice(product.originalPrice!)}
           </span>
         )}
       </div>
@@ -151,8 +154,16 @@ export function ProductDetail({ product }: ProductDetailProps) {
               </>
             )}
           </Button>
-          <Button variant="outline" size="lg">
-            <Heart className="h-4 w-4" />
+          <Button
+            variant="outline"
+            size="lg"
+            className={cn(
+              "transition-colors",
+              isFav && "text-red-500 hover:text-red-600 border-red-200 bg-red-50 dark:bg-red-950/20 dark:border-red-900"
+            )}
+            onClick={() => toggle(product.id)}
+          >
+            <Heart className={cn("h-4 w-4", isFav && "fill-current")} />
           </Button>
         </div>
       </div>
@@ -165,7 +176,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
           <Truck className="h-5 w-5 text-muted-foreground" />
           <div>
             <p className="font-medium">Envio gratis</p>
-            <p className="text-xs text-muted-foreground">En pedidos +S/ 200</p>
+            <p className="text-xs text-muted-foreground">En pedidos +{formatPrice(200)}</p>
           </div>
         </div>
         <div className="flex items-center gap-3 text-sm">

@@ -316,10 +316,10 @@ async function main() {
   // Create Admin User
   const adminUser = await prisma.user.create({
     data: {
-      email: "admin@basictech.com",
+      email: "admin@techhub.com",
       password: "$2b$10$MAPa0Pc3jCFOY3HRTcNhwOpnXZq8xv70T2zPN7Hl4QNk5PGdr10pq", // password: admin123
       name: "Admin User",
-      phone: "+51 999 888 777",
+      phone: "+54 9 11 1234 5678",
       role: "ADMIN",
       status: "ACTIVE",
     },
@@ -332,7 +332,7 @@ async function main() {
       email: "juan@email.com",
       password: "$2b$10$MAPa0Pc3jCFOY3HRTcNhwOpnXZq8xv70T2zPN7Hl4QNk5PGdr10pq", // password: admin123
       name: "Juan Perez",
-      phone: "+51 987 654 321",
+      phone: "+54 9 11 8765 4321",
       role: "CUSTOMER",
       status: "ACTIVE",
     },
@@ -344,11 +344,11 @@ async function main() {
     data: {
       label: "Casa",
       name: "Juan Perez",
-      phone: "+51 987 654 321",
-      address: "Av. Javier Prado 1234",
-      city: "Lima",
-      state: "Lima",
-      zipCode: "15036",
+      phone: "+54 9 11 8765 4321",
+      address: "Av. Corrientes 1234",
+      city: "Buenos Aires",
+      state: "CABA",
+      zipCode: "1043",
       isDefault: true,
       userId: customerUser.id,
     },

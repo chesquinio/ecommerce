@@ -10,18 +10,22 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { FilterSidebar } from "./FilterSidebar"
-import { FilterState } from "@/types"
+import { Brand, Category, FilterState } from "@/types"
 
 interface FilterMobileProps {
   filters: FilterState
   onFiltersChange: (filters: FilterState) => void
   activeFilterCount: number
+  categories: Category[]
+  brands: Brand[]
 }
 
 export function FilterMobile({
   filters,
   onFiltersChange,
   activeFilterCount,
+  categories,
+  brands,
 }: FilterMobileProps) {
   return (
     <Sheet>
@@ -41,7 +45,12 @@ export function FilterMobile({
           <SheetTitle>Filtros</SheetTitle>
         </SheetHeader>
         <div className="mt-6">
-          <FilterSidebar filters={filters} onFiltersChange={onFiltersChange} />
+          <FilterSidebar
+            filters={filters}
+            onFiltersChange={onFiltersChange}
+            categories={categories}
+            brands={brands}
+          />
         </div>
       </SheetContent>
     </Sheet>

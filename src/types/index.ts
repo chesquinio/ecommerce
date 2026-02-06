@@ -26,6 +26,7 @@ export interface Category {
 export interface Brand {
   id: string
   name: string
+  slug: string
   logo?: string
   productCount: number
 }

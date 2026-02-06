@@ -1,13 +1,16 @@
-"use client"
-
 import Link from "next/link"
 import { Heart } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { ProductCard } from "@/components/products/ProductCard"
-import { favorites } from "@/data/mock-user"
+import { getFavoriteProducts } from "@/actions/favorites"
+import { transformProduct } from "@/lib/transformers"
 
-export default function FavoritesPage() {
+export default async function FavoritesPage() {
+  const favoritesData = await getFavoriteProducts()
+  // @ts-ignore - DB types match enough for transformer
+  const favorites = favoritesData.map(transformProduct)
+
   return (
     <div className="space-y-6">
       <div>

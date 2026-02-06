@@ -1,17 +1,17 @@
-"use client"
-
 import { useState } from "react"
 import { ChevronDown, ChevronUp } from "lucide-react"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
-import { categories } from "@/data/mock-products"
+import { Category } from "@/types"
 
 interface CategoryFilterProps {
+  categories: Category[]
   selectedCategories: string[]
   onCategoriesChange: (categories: string[]) => void
 }
 
 export function CategoryFilter({
+  categories,
   selectedCategories,
   onCategoriesChange,
 }: CategoryFilterProps) {
@@ -54,7 +54,8 @@ export function CategoryFilter({
               >
                 <span>{category.name}</span>
                 <span className="text-xs text-muted-foreground">
-                  {category.productCount}
+                  {/* We might need to update productCount logic if available from API */}
+                  {/* For now, removing it or handling it if API provides it */}
                 </span>
               </Label>
             </div>

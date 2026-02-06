@@ -20,7 +20,7 @@ import { FilterState } from "@/types"
 
 function ProductsContent() {
   const searchParams = useSearchParams()
-  const { products, loading, filters, setFilters, fetchProducts, fetchCategories, fetchBrands } = useProductsStore()
+  const { products, loading, filters, setFilters, fetchProducts, fetchCategories, fetchBrands, categories, brands } = useProductsStore()
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
 
   // Initialize filters from URL params
@@ -87,6 +87,8 @@ function ProductsContent() {
             filters={filters}
             onFiltersChange={handleFiltersChange}
             activeFilterCount={activeFilterCount}
+            categories={categories}
+            brands={brands}
           />
           <SortSelect
             value={filters.sortBy}
@@ -102,7 +104,12 @@ function ProductsContent() {
         {/* Sidebar - Desktop */}
         <aside className="hidden w-64 shrink-0 lg:block">
           <div className="sticky top-24">
-            <FilterSidebar filters={filters} onFiltersChange={handleFiltersChange} />
+            <FilterSidebar
+              filters={filters}
+              onFiltersChange={handleFiltersChange}
+              categories={categories}
+              brands={brands}
+            />
           </div>
         </aside>
 

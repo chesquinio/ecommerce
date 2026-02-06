@@ -9,6 +9,8 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { Product } from "@/types"
 import { useCartStore } from "@/stores/cart-store"
+import { formatPrice, cn } from "@/lib/utils"
+import { useFavorites } from "@/components/providers/FavoritesProvider"
 
 interface ProductCardProps {
   product: Product
@@ -19,6 +21,8 @@ const PLACEHOLDER_IMAGE = "https://images.unsplash.com/photo-1629429408209-1f912
 export function ProductCard({ product }: ProductCardProps) {
   const addItem = useCartStore((state) => state.addItem)
   const [added, setAdded] = useState(false)
+  const { isFavorite, toggle } = useFavorites()
+  const isFav = isFavorite(product.id)
 
   const hasDiscount = product.originalPrice && product.originalPrice > product.price
   const discountPercent = hasDiscount
@@ -33,6 +37,12 @@ export function ProductCard({ product }: ProductCardProps) {
     addItem(product)
     setAdded(true)
     setTimeout(() => setAdded(false), 1500)
+  }
+
+  const handleToggleFavorite = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    toggle(product.id)
   }
 
   return (
@@ -52,9 +62,13 @@ export function ProductCard({ product }: ProductCardProps) {
         <Button
           variant="ghost"
           size="icon"
-          className="absolute right-2 top-2 z-10 h-8 w-8 rounded-full bg-background/80 opacity-0 transition-opacity group-hover:opacity-100"
+          className={cn(
+            "absolute right-2 top-2 z-10 h-8 w-8 rounded-full bg-background/80 transition-all",
+            isFav ? "opacity-100 text-red-500 hover:text-red-600" : "opacity-0 group-hover:opacity-100"
+          )}
+          onClick={handleToggleFavorite}
         >
-          <Heart className="h-4 w-4" />
+          <Heart className={cn("h-4 w-4", isFav && "fill-current")} />
           <span className="sr-only">Agregar a favoritos</span>
         </Button>
 
@@ -115,11 +129,11 @@ export function ProductCard({ product }: ProductCardProps) {
         {/* Price */}
         <div className="mt-2 flex items-baseline gap-2">
           <span className="text-lg font-bold text-primary">
-            S/ {product.price.toFixed(2)}
+            {formatPrice(product.price)}
           </span>
           {hasDiscount && (
             <span className="text-sm text-muted-foreground line-through">
-              S/ {product.originalPrice!.toFixed(2)}
+              {formatPrice(product.originalPrice!)}
             </span>
           )}
         </div>

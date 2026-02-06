@@ -1,18 +1,17 @@
-"use client"
-
 import { useState } from "react"
 import { ChevronDown, ChevronUp, Search } from "lucide-react"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { brands } from "@/data/mock-products"
+import { Brand } from "@/types"
 
 interface BrandFilterProps {
+  brands: Brand[]
   selectedBrands: string[]
   onBrandsChange: (brands: string[]) => void
 }
 
-export function BrandFilter({ selectedBrands, onBrandsChange }: BrandFilterProps) {
+export function BrandFilter({ brands, selectedBrands, onBrandsChange }: BrandFilterProps) {
   const [isOpen, setIsOpen] = useState(true)
   const [searchQuery, setSearchQuery] = useState("")
 
@@ -60,8 +59,8 @@ export function BrandFilter({ selectedBrands, onBrandsChange }: BrandFilterProps
               <div key={brand.id} className="flex items-center space-x-2">
                 <Checkbox
                   id={`brand-${brand.id}`}
-                  checked={selectedBrands.includes(brand.name)}
-                  onCheckedChange={() => handleBrandToggle(brand.name)}
+                  checked={selectedBrands.includes(brand.slug)}
+                  onCheckedChange={() => handleBrandToggle(brand.slug)}
                 />
                 <Label
                   htmlFor={`brand-${brand.id}`}
@@ -69,7 +68,7 @@ export function BrandFilter({ selectedBrands, onBrandsChange }: BrandFilterProps
                 >
                   <span>{brand.name}</span>
                   <span className="text-xs text-muted-foreground">
-                    {brand.productCount}
+                    {/* brand.productCount */}
                   </span>
                 </Label>
               </div>

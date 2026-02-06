@@ -1,12 +1,11 @@
 services:
   postgres:
     image: postgres:16-alpine
-    container_name: basictech-db
+    container_name: ecommerce-db
     restart: unless-stopped
     environment:
-      POSTGRES_USER: basictech
-      POSTGRES_PASSWORD: basictech123
-      POSTGRES_DB: basictech_shop
+      POSTGRES_USER: ecommerce
+      POSTGRES_PASSWORD: ecommerce123
+      POSTGRES_DB: ecommerce_shop
     ports:
       - "5490:5432"
-

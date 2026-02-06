@@ -107,7 +107,7 @@ export default function AdminDashboard() {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <StatsCard
           title="Ingresos Totales"
-          value={`S/ ${(stats?.totalRevenue || 0).toLocaleString()}`}
+          value={`$ ${(stats?.totalRevenue || 0).toLocaleString()}`}
           change={0}
           icon={DollarSign}
         />
@@ -176,16 +176,16 @@ export default function AdminDashboard() {
                           order.status === "delivered"
                             ? "default"
                             : order.status === "shipped"
-                            ? "secondary"
-                            : order.status === "cancelled"
-                            ? "destructive"
-                            : "outline"
+                              ? "secondary"
+                              : order.status === "cancelled"
+                                ? "destructive"
+                                : "outline"
                         }
                       >
                         {statusLabels[order.status] || order.status}
                       </Badge>
                       <span className="text-sm font-medium">
-                        S/ {order.total.toFixed(2)}
+                        $ {order.total.toFixed(2)}
                       </span>
                     </div>
                   </div>

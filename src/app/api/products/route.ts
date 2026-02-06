@@ -7,8 +7,8 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url)
 
     // Query params
-    const category = searchParams.get("category")
-    const brand = searchParams.get("brand")
+    const categories = searchParams.getAll("category")
+    const brands = searchParams.getAll("brand")
     const minPrice = searchParams.get("minPrice")
     const maxPrice = searchParams.get("maxPrice")
     const sortBy = searchParams.get("sortBy") || "newest"
@@ -23,12 +23,12 @@ export async function GET(request: NextRequest) {
       isActive: true,
     }
 
-    if (category) {
-      where.category = { slug: category }
+    if (categories.length > 0) {
+      where.category = { slug: { in: categories } }
     }
 
-    if (brand) {
-      where.brand = { slug: brand }
+    if (brands.length > 0) {
+      where.brand = { slug: { in: brands } }
     }
 
     if (minPrice || maxPrice) {

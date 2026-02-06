@@ -40,9 +40,9 @@ export function Footer() {
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-2">
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-                <span className="text-sm font-bold text-primary-foreground">BT</span>
+                <span className="text-sm font-bold text-primary-foreground">TH</span>
               </div>
-              <span className="text-xl font-bold">BasicTechShop</span>
+              <span className="text-xl font-bold">Tech Hub</span>
             </Link>
             <p className="mt-4 text-sm text-muted-foreground">
               Tu tienda de tecnologia de confianza. Los mejores productos de computacion a los mejores precios.
@@ -120,15 +120,15 @@ export function Footer() {
             <ul className="mt-4 space-y-3">
               <li className="flex items-start gap-2 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4 mt-0.5 shrink-0" />
-                <span>Av. Tecnologia 123, Lima, Peru</span>
+                <span>Av. Corrientes 1234, CABA, Argentina</span>
               </li>
               <li className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Phone className="h-4 w-4 shrink-0" />
-                <span>+51 999 888 777</span>
+                <span>+54 9 11 1234 5678</span>
               </li>
               <li className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Mail className="h-4 w-4 shrink-0" />
-                <span>info@basictechshop.com</span>
+                <span>info@techhub.com</span>
               </li>
             </ul>
           </div>
@@ -139,7 +139,7 @@ export function Footer() {
         {/* Bottom */}
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
           <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} BasicTechShop. Todos los derechos reservados.
+            &copy; {new Date().getFullYear()} Tech Hub. Todos los derechos reservados.
           </p>
           <div className="flex gap-4">
             {footerLinks.legal.map((link) => (
